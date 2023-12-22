@@ -23,7 +23,7 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
-      <html lang="en" className="h-full" suppressHydrationWarning={true}>
+      <html lang="en" suppressHydrationWarning={true}>
         <body
           className={cn(
             "relative font-sans h-full antialiased",

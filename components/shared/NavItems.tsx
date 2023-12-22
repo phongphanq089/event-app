@@ -9,7 +9,7 @@ const NavItems = () => {
   const pathname = usePathname();
 
   return (
-    <ul className="hidden md:flex-between md:flex w-full flex-col items-start gap-5 md:flex-row">
+    <ul className=" md:flex-between md:flex w-full flex-col items-start gap-5 md:flex-row">
       {headerLinks.map((link) => {
         const isActive = pathname === link.route;
 
@@ -17,8 +17,8 @@ const NavItems = () => {
           <li
             key={link.route}
             className={`${
-              isActive && "text-primary-500"
-            } flex-center p-medium-16 whitespace-nowrap`}
+              isActive && "text-violet-500"
+            } flex-center font-bold p-medium-16 whitespace-nowrap`}
           >
             <Link href={link.route}>{link.label}</Link>
           </li>

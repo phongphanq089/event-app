@@ -1,6 +1,11 @@
 import mongoose from "mongoose";
 
-const MONGODB_URI = process.env.MONGODB_URI;
+const MONGODB_URI =
+  "mongodb+srv://phongphanq089:0905890925zZ@cluster0.95axkol.mongodb.net/?retryWrites=true&w=majority";
+
+const MONGODB_URI1 = process.env.MONGODB_URI;
+
+console.log(MONGODB_URI1);
 
 let cached = (global as any).mongoose || { conn: null, promise: null };
 

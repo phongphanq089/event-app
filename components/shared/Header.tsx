@@ -17,22 +17,24 @@ const Header = () => {
               <Link href="/" className="mr-auto flex items-center">
                 <Logo className="w-[70px] mb-2" />
               </Link>
-              <div className="mx-auto">
+              <div className="mx-auto  hidden md:block ">
                 <SignedIn>
                   <NavItems />
                 </SignedIn>
               </div>
               <div className="ml-auto flex items-center">
                 <div className="flex items-center">
-                  <SignedIn>
-                    <UserButton afterSignOutUrl="/" />
-                  </SignedIn>
+                  <div className="user-avatar">
+                    <SignedIn>
+                      <UserButton afterSignOutUrl="/" />
+                    </SignedIn>
+                  </div>
                   <div className="ml-5">
                     <MobileNav />
                   </div>
                   <SignedOut>
                     <Link
-                      href={"/sign-in"}
+                      href={"/sign-up"}
                       className={buttonVariants({
                         className: "w-[100px]",
                       })}
