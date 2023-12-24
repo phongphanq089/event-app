@@ -1,17 +1,32 @@
 import BannerHero from "@/components/BannerHero";
+import CartNotEvent from "@/components/CartNotEvent";
 import CategoryFilter from "@/components/CategoryFilter";
+import Collection from "@/components/Collection";
 import Search from "@/components/Search";
 import MaxWidthWrapper from "@/components/layout/MaxWidthWrapper";
 import Typography from "@/components/ui/Typography";
+import { getAllEvent } from "@/lib/actions/event.action";
+import { SearchParamProps } from "@/types";
 
 import Image from "next/image";
 
-export default function Home() {
+export default async function Home({ searchParams }: SearchParamProps) {
+  const page = Number(searchParams?.page) || 1;
+  const searchText = (searchParams?.query as string) || "";
+  const category = (searchParams?.category as string) || "";
+
+  const events = await getAllEvent({
+    query: searchText,
+    category,
+    page,
+    limit: 6,
+  });
+  console.log(events);
+
   return (
-    <div>
-      <div className="mt-[100px]">
-        <BannerHero />
-      </div>
+    <>
+      <BannerHero />
+
       <MaxWidthWrapper className="py-10">
         <section
           id="events"
@@ -24,8 +39,18 @@ export default function Home() {
             <Search />
             <CategoryFilter />
           </div>
+          <Collection
+            data={events?.data}
+            emptyTitle="No Events Found"
+            emptyStateSubtext="Come back later"
+            collectionType="All_Events"
+            limit={6}
+            page={page}
+            totalPages={events?.totalPages}
+          />
+          {/* <CartNotEvent /> */}
         </section>
       </MaxWidthWrapper>
-    </div>
+    </>
   );
 }

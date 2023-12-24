@@ -5,6 +5,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { cn } from "@/lib/utils";
 import Header from "@/components/shared/Header";
 import Footer from "@/components/shared/Footer";
+import { Toaster } from "sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -35,10 +36,11 @@ export default function RootLayout({
           <Header />
           {/* ======== || RENDER CONTAINER MAIN || ================= */}
           <main className="h-full flex flex-col min-h-screen">
-            <div className="flex-grow flex-1">{children}</div>
+            <div className="flex-grow flex-1 mt-[120px]">{children}</div>
           </main>
           {/* ======== || RENDER FOOTER || ================= */}
           <Footer />
+          <Toaster position="top-center" richColors />
         </body>
       </html>
     </ClerkProvider>

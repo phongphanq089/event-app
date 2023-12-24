@@ -1,4 +1,4 @@
-import CreateFormEvent from "@/components/CreateFormEvent";
+import CreateFormEvent from "@/components/shared/CreateFormEvent";
 import MaxWidthWrapper from "@/components/layout/MaxWidthWrapper";
 import Typography from "@/components/ui/Typography";
 import { getEventById } from "@/lib/actions/event.action";
@@ -12,7 +12,7 @@ const CreateEvent = () => {
 
   return (
     <>
-      <section className="bg-primary-50 bg-dotted-pattern bg-cover bg-center py-5 md:py-10 mt-[80px]">
+      <section className="bg-primary-50 bg-dotted-pattern bg-cover bg-center py-5 md:py-10">
         <Typography variant="h2" className="wrapper h3-bold text-center ">
           Create Event
         </Typography>

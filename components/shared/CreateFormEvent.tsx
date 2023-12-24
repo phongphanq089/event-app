@@ -1,24 +1,31 @@
 "use client";
 import React from "react";
-import { Input } from "./ui/input";
-import { Form, FormControl, FormField, FormItem, FormMessage } from "./ui/form";
+import { Input } from "../ui/input";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "../ui/form";
 import { IEvent } from "@/lib/database/models/event.model";
 import { useForm } from "react-hook-form";
 import { EventFormSchemaValidator, eventFormSchema } from "@/lib/validator";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { eventDefaultValues } from "@/contants";
-import { Textarea } from "./ui/textarea";
-import FileUpload from "./FileUpload";
+import { Textarea } from "../ui/textarea";
+import FileUpload from "../FileUpload";
 import { uploadFiles, useUploadThing } from "@/lib/uploadThing";
 import { CalendarDays, DollarSign, Link2, Map } from "lucide-react";
 import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
-import { Checkbox } from "./ui/checkbox";
-import { Button } from "./ui/button";
-import CreateCategoties from "./CreateCategoties";
-import { createEvent } from "@/lib/actions/event.action";
+import { Checkbox } from "../ui/checkbox";
+import { Button } from "../ui/button";
+import CreateCategoties from "../CreateCategoties";
+import { createEvent, updateEvent } from "@/lib/actions/event.action";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 type EventFormProps = {
   userId: string;
@@ -55,7 +62,7 @@ const CreateFormEvent = ({ userId, type, event, eventId }: EventFormProps) => {
 
     if (files.length > 0) {
       const uploadedImages = await startUpload(files);
-      console.log(uploadedImages, "sdhsdghsodig");
+
       if (!uploadedImages) {
         return;
       }
@@ -71,8 +78,31 @@ const CreateFormEvent = ({ userId, type, event, eventId }: EventFormProps) => {
         });
 
         if (newEvent) {
+          toast.success("Update event cart succsess !");
           form.reset();
-          router.push(`/events/${newEvent._id}`);
+          // router.push(`/events/${newEvent._id}`);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    if (type === "Update") {
+      if (!eventId) {
+        router.back();
+        return;
+      }
+
+      try {
+        const updatedEvent = await updateEvent({
+          userId,
+          event: { ...values, imageUrl: uploadedImageUrl, _id: eventId },
+          path: `/events/${eventId}`,
+        });
+
+        if (updatedEvent) {
+          form.reset();
+          router.push(`/events/${updatedEvent._id}`);
         }
       } catch (error) {
         console.log(error);

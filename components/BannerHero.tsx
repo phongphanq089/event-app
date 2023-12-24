@@ -7,7 +7,7 @@ import MaxWidthWrapper from "./layout/MaxWidthWrapper";
 
 const BannerHero = () => {
   return (
-    <MaxWidthWrapper className="py-10">
+    <MaxWidthWrapper className="pb-10">
       <div className="grid grid-cols-1 lg:grid-cols-2">
         <div className=" flex items-start justify-center flex-col mx-auto max-w-3xl text-start">
           <Typography variant="h1" className="leading-[1.2]">
